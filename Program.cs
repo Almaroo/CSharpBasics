@@ -319,6 +319,50 @@ namespace PO_01
 
             return tab;
         }
+
+        static void TablicaZnakow()
+        {
+            ConsoleKeyInfo cKI;
+            char[] tablicaZnakow = new char[30];
+
+            int i = 0;
+            do
+            {
+                cKI = Console.ReadKey();
+
+                if (cKI.Key == ConsoleKey.Enter)
+                    break;
+                else
+                    tablicaZnakow[i] = cKI.KeyChar;
+               
+
+                i++;
+            } while (i < 30);
+
+            Console.WriteLine();
+            foreach (char znak in tablicaZnakow)
+            {
+                if (Char.IsLetter(znak))
+                    Console.Write($" {znak} ");
+            }
+            Console.WriteLine();
+        }
+
+        static double Suma(params double[] liczby)
+        {
+            double suma = 0;
+
+            //suma = liczby.Sum(); //ponownie nigdzie nie było że nie wolno
+
+            //formalnie
+
+            foreach(double liczba in liczby)
+            {
+                suma += liczba;
+            }
+
+            return suma;
+        }
     }
 
 }
