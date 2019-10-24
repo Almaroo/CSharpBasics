@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace PO_3
 {
-    class Osoba
+    //dodajemy słowo kluczowe abstract, jest to swego rodzaju szablon dla dziedziczących klas
+    //tj każda z dziedziczących klas będzie miała dostęp do pól i metod
+    abstract class Osoba 
     {
-        private string _imie; //Ładnie jest prywatne zmienne nazwyać sobie _nazwaZmiennej co się przyda przy konstruktorze
+        protected string _imie; //Ładnie jest prywatne zmienne nazwyać sobie _nazwaZmiennej co się przyda przy konstruktorze
         public string Nazwisko { get; set; }
-        private DateTime _dataUrodzenia;
-        private string _PESEL;
-        private Plcie _plec;
+        protected DateTime _dataUrodzenia;
+        protected string _PESEL;
+        protected Plcie _plec;
 
         public string Imie
         {
@@ -61,7 +63,7 @@ namespace PO_3
             return DateTime.Now.Year - _dataUrodzenia.Year;
         }
 
-        public override string ToString()
+        public override string ToString() //bez tej metody dostaniemy błąd mówiący że KierownikZespolu nie implementuje metod dziedziczonych po Osoba 
         {
             /* 
              * $ przed stringiem pozwala na interpolację stringa. To znaczy że:
@@ -70,7 +72,8 @@ namespace PO_3
              * _imie + " " + Nazwisko
              * a zdecydowanie ładniejsze c: miłe, fajne, wygodne i intuicyjne
              */
-            return $"{_imie} {Nazwisko} {_dataUrodzenia.Year:0000}-{_dataUrodzenia.Month:00}-{_dataUrodzenia.Day:00} {_PESEL} {_plec}"; 
+            return $"{_imie} {Nazwisko} {_dataUrodzenia.Year:0000}-{_dataUrodzenia.Month:00}-{_dataUrodzenia.Day:00} {_PESEL} {_plec}";
         }
+
     }
 }
