@@ -73,7 +73,7 @@ namespace PO_3
             return DateTime.Now.Year - _dataUrodzenia.Year;
         }
 
-        public override string ToString() //bez tej metody dostaniemy błąd mówiący że KierownikZespolu nie implementuje metod dziedziczonych po Osoba 
+        public override string ToString()
         {
             /* 
              * $ przed stringiem pozwala na interpolację stringa. To znaczy że:
