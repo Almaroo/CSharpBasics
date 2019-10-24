@@ -89,29 +89,29 @@ namespace PO_3
         {
             Regex peselRegEx = new Regex(@"^\d{11}$");
             
-            if(peselRegEx.IsMatch(PESEL))
+            if(peselRegEx.IsMatch(PESEL)) //sprawdzamy ogólną postać PESELu
             {
                 int tmpData = ((_dataUrodzenia.Year / 10) % 10) * 10 + _dataUrodzenia.Year % 10; //dwie ostatnie cyfry roku urodzenia w postaci cyfry
                 int tmpPESEL = ((int)PESEL[0] - 48) * 10 + ((int)PESEL[1] - 48); //dwie pierwsze liczby PESELU
 
-                if (tmpData == tmpPESEL)
+                if (tmpData == tmpPESEL) // dwie pierwsze cyfry -> ROK
                 {
                     tmpData = _dataUrodzenia.Month;
-                    tmpPESEL = ((int)PESEL[2] - 48) * 10 + ((int)PESEL[3] - 48); //trzecia i czwarta liczba PESELU
+                    tmpPESEL = ((int)PESEL[2] - 48) * 10 + ((int)PESEL[3] - 48); //trzecia i czwarta liczba PESELU -> MIESIĄC
 
-                    if (tmpData == tmpPESEL)
+                    if (tmpData == tmpPESEL) //trzecia i czwarta cyfra
                     {
                         tmpData = _dataUrodzenia.Day;
-                        tmpPESEL = ((int)PESEL[4] - 48) * 10 + ((int)PESEL[5] - 48); //piąta i szósta liczba PESELU
+                        tmpPESEL = ((int)PESEL[4] - 48) * 10 + ((int)PESEL[5] - 48); //piąta i szósta liczba PESELU -> DZIEŃ
 
-                        if(tmpData == tmpPESEL)
+                        if(tmpData == tmpPESEL) //piąta i szósta cyfra
                         {
 
-                            if((_plec == Plcie.K && ((int)PESEL[9] - 48) % 2 == 0) || (_plec == Plcie.M && ((int)PESEL[9] - 48) % 2 != 0))
+                            if((_plec == Plcie.K && ((int)PESEL[9] - 48) % 2 == 0) || (_plec == Plcie.M && ((int)PESEL[9] - 48) % 2 != 0)) // dziesiąta cyfra -> PŁEĆ
                             {
                                 tmpPESEL = 9 * ((int)PESEL[0] - 48) + 7 * ((int)PESEL[1] - 48) + 3 * ((int)PESEL[2] - 48) + 1 * ((int)PESEL[3] - 48) + 9 * ((int)PESEL[4] - 48) + 7 * ((int)PESEL[5] - 48) + 3 * ((int)PESEL[6] - 48) + 1 * ((int)PESEL[7] - 48) + 9 * ((int)PESEL[8] - 48) + 7 * ((int)PESEL[9] - 48);
 
-                                if(tmpPESEL % 10 == ((int)PESEL[10] - 48))
+                                if(tmpPESEL % 10 == ((int)PESEL[10] - 48)) // jedenasta cyfra -> KONTROLNA
                                 {
                                     _PESEL = PESEL;
                                 }
